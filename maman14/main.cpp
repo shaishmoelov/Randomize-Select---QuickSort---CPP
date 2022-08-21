@@ -8,13 +8,45 @@
 #include <algorithm>
 
 
+void Execute_random_quickSort(int* arr, int p, int r, int k, int* cmp) {
+	randomizeSelect(arr, p, r, k, cmp);
+	quickSort(arr, 0, k - 1, cmp);
+	
+	std::cout << "Using randomize selectand quick sort, let's print the " << k <<  " smallest elements from " << r+1 << " elements" << std::endl;
+	for (int i = 0; i < k; i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "Lets print the number of comparetions we done: " << (*cmp) << std::endl;
+	(*cmp) = 0;
+	std::cout << std::endl;
+	std::cout << std::endl;
+}
+
+
+void Execute_heap(int* arr, int n, int k) {
+	minHeap<int> heap(arr, 100);
+	heap.buildMinHeap();
+	std::cout << "Lets print the result for A array with n=" << n <<  " and k=" << k << std::endl;
+	for (int i = 0; i < k; i++) {
+		std::cout << heap.heapExtractMin() << " ";
+	}
+	std::cout << std::endl;
+	heap.printCmpSize();
+	std::cout << std::endl;
+	std::cout << std::endl;
+}
+
+
+
 
 
 
 int main()
 {
-	int n, k,tmp_number,num_of_comp_random_quick=0;
+	int n, k, tmp_number, num_of_comp_random_quick = 0;
 	char random_bool;
+	srand(time(0));
 	std::cout << "HELLO! Please provide the lenght of the array as an integer: ";
 	std::cin >> n;
 	std::cout << "Please let me know how many smallest numbers you would like as an integer: ";
@@ -44,32 +76,242 @@ int main()
 	for (int i = 0; i < n; i++) {
 		arr_to_quicksort[i] = arr_to_heap[i];
 	}
-
+	std::cout << std::endl;
+	std::cout << std::endl;
 	/*Randomize select && quicksort part*/
-	std::cout << randomizeSelect(arr_to_quicksort,0, n-1, k-1,&num_of_comp_random_quick) << std::endl;
-	quickSort(arr_to_quicksort, 0, k-1,&num_of_comp_random_quick);
-	std::cout << std::endl;
-
-	/*Using randomize select and quick sort, let's print the k smallest elements*/
-	std::cout << "According to the randomize select and quick sort algorithms, the " << k <<
-		"smallest elements are: "<< std::endl;
-	for (int i = 0; i < k; i++) {
-		std::cout << arr_to_quicksort[i] << " ";
-	}
-	std::cout << std::endl;
+	Execute_random_quickSort(arr_to_quicksort, 0, n-1 , k , &num_of_comp_random_quick);
 	
-	std::cout << "Let's print the number of comparisons we made: " ;
-	std::cout << num_of_comp_random_quick << std::endl;
-
 	/*Heap part*/
 	minHeap<int> heap(arr_to_heap, n);
 	heap.buildMinHeap();
-	std::cout << "We can now print the k smallest elements we found with the Min Heap structure: " << std::endl;
+	std::cout << "We can now print the " << k << " smallest elements we found with the Min Heap structure : " << std::endl;
 	for (int i = 0; i < k; i++) {
 		std::cout << heap.heapExtractMin() << " ";
 	}
 	std::cout << std::endl;
 	heap.printCmpSize();
+
+
+	delete[] arr_to_heap;
+	delete[] arr_to_quicksort;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "SECTION B: " << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	/*Allocate araays for the randomize select, quicksort, heap and random integers elements for them*/
+	int k1 = 8, k2 = 50, k3 = 100;
+	int* A_rand_quick_k1 = new int[100];
+	int* A_rand_quick_k2 = new int[100];
+	int* A_rand_quick_k3 = new int[100];
+	int* B_rand_quick_k1 = new int[200];
+	int* B_rand_quick_k2 = new int[200];
+	int* B_rand_quick_k3 = new int[200];
+	int* C_rand_quick_k1 = new int[500];
+	int* C_rand_quick_k2 = new int[500];
+	int* C_rand_quick_k3 = new int[500];
+	int* D_rand_quick_k1 = new int[1000];
+	int* D_rand_quick_k2 = new int[1000];
+	int* D_rand_quick_k3 = new int[1000];
+	int cmpNumA = 0;
+	int cmpNumB = 0;
+	int cmpNumC = 0;
+	int cmpNumD = 0;
+	int* A_heap_k1 = new int[100];
+	int* A_heap_k2 = new int[100];
+	int* A_heap_k3 = new int[100];
+	int* B_heap_k1 = new int[200];
+	int* B_heap_k2 = new int[200];
+	int* B_heap_k3 = new int[200];
+	int* C_heap_k1 = new int[500];
+	int* C_heap_k2 = new int[500];
+	int* C_heap_k3 = new int[500];
+	int* D_heap_k1 = new int[1000];
+	int* D_heap_k2 = new int[1000];
+	int* D_heap_k3 = new int[1000];
+
+	for (int i = 0; i < 100; i++) {
+		A_rand_quick_k1[i] = rand() % 100;
+		A_rand_quick_k2[i] = rand() % 100;
+		A_rand_quick_k3[i] = rand() % 100;
+	}
+	for (int i = 0; i < 200; i++) {
+		B_rand_quick_k1[i] = rand() % 200;
+		B_rand_quick_k2[i] = rand() % 200;
+		B_rand_quick_k3[i] = rand() % 200;
+	}
+	for (int i = 0; i < 500; i++) {
+		C_rand_quick_k1[i] = rand() % 500;
+		C_rand_quick_k2[i] = rand() % 500;
+		C_rand_quick_k3[i] = rand() % 500;
+	}
+	for (int i = 0; i < 1000; i++) {
+		D_rand_quick_k1[i] = rand() % 1000;
+		D_rand_quick_k2[i] = rand() % 1000;
+		D_rand_quick_k3[i] = rand() % 1000;
+	}
+
+	/*Copy the array for the heap section*/
+
+	for (int i = 0; i < 100; i++) {
+		A_heap_k1[i] = A_rand_quick_k1[i];
+	}
+	for (int i = 0; i < 200; i++) {
+		B_heap_k1[i] = B_rand_quick_k1[i];
+	}
+	for (int i = 0; i < 500; i++) {
+		C_heap_k1[i] = C_rand_quick_k1[i];
+	}
+	for (int i = 0; i < 1000; i++) {
+		D_heap_k1[i] = D_rand_quick_k1[i];
+	}
+
+	/*Copy the array for the heap section*/
+
+	for (int i = 0; i < 100; i++) {
+		A_heap_k2[i] = A_rand_quick_k2[i];
+	}
+	for (int i = 0; i < 200; i++) {
+		B_heap_k2[i] = B_rand_quick_k2[i];
+	}
+	for (int i = 0; i < 500; i++) {
+		C_heap_k2[i] = C_rand_quick_k2[i];
+	}
+	for (int i = 0; i < 1000; i++) {
+		D_heap_k2[i] = D_rand_quick_k2[i];
+	}
+
+	/*Copy the array for the heap section*/
+
+	for (int i = 0; i < 100; i++) {
+		A_heap_k3[i] = A_rand_quick_k3[i];
+	}
+	for (int i = 0; i < 200; i++) {
+		B_heap_k3[i] = B_rand_quick_k3[i];
+	}
+	for (int i = 0; i < 500; i++) {
+		C_heap_k3[i] = C_rand_quick_k3[i];
+	}
+	for (int i = 0; i < 1000; i++) {
+		D_heap_k3[i] = D_rand_quick_k3[i];
+	}
+
+
+	std::cout << "Part of randomize select and quicksort" << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	/*Execute with A as input, n=100 k=8*/
+	Execute_random_quickSort(A_rand_quick_k1, 0, 99, k1, &cmpNumA);
+
+	/*Execute with A as input, n=100 k=50*/
+	Execute_random_quickSort(A_rand_quick_k2, 0, 99, k2, &cmpNumA);
+
+	/*Execute with A as input, n=100 k=100*/
+	Execute_random_quickSort(A_rand_quick_k3, 0, 99, k3, &cmpNumA);
+
+	/*Execute with B as input, n=200 k=8*/
+	Execute_random_quickSort(B_rand_quick_k1, 0, 199, k1, &cmpNumB);
+
+	/*Execute with B as input, n=200 k=50*/
+	Execute_random_quickSort(B_rand_quick_k2, 0, 199, k2, &cmpNumB);
+
+	/*Execute with B as input, n=200 k=100*/
+	Execute_random_quickSort(B_rand_quick_k3, 0, 199, k3, &cmpNumB);
+
+	/*Execute with C as input, n=500 k=8*/
+	Execute_random_quickSort(C_rand_quick_k1, 0, 499, k1, &cmpNumC);
+
+	/*Execute with C as input, n=500 k=50*/
+	Execute_random_quickSort(C_rand_quick_k2, 0, 499, k2, &cmpNumC);
+
+	/*Execute with C as input, n=500 k=100*/
+	Execute_random_quickSort(C_rand_quick_k3, 0, 499, k3, &cmpNumC);
+
+	/*Execute with D as input, n=1000 k=8*/
+	Execute_random_quickSort(D_rand_quick_k1, 0, 999, k1, &cmpNumD);
+
+	/*Execute with D as input, n=1000 k=50*/
+	Execute_random_quickSort(D_rand_quick_k2, 0, 999, k2, &cmpNumD);
+
+	/*Execute with D as input, n=1000 k=100*/
+	Execute_random_quickSort(D_rand_quick_k3, 0, 999, k3, &cmpNumD);
+
+	std::cout << "Part of Heap" << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	/*Execute with A input, n=100 k=8*/
+	Execute_heap(A_heap_k1, 100, k1);
+
+	/*Execute with A input, n=100 k=50*/
+	Execute_heap(A_heap_k2, 100, k2);
+
+	/*Execute with A input, n=100 k=100*/
+	Execute_heap(A_heap_k3, 100, k3);
+
+	/*Execute with B input, n=200 k=8*/
+	Execute_heap(B_heap_k1, 200, k1);
+
+	/*Execute with B input, n=200 k=50*/
+	Execute_heap(B_heap_k2, 200, k2);
+
+	/*Execute with B input, n=200 k=100*/
+	Execute_heap(B_heap_k3, 200, k3);
+
+	/*Execute with C input, n=500 k=8*/
+	Execute_heap(C_heap_k1, 500, k1);
+
+	/*Execute with C input, n=500 k=50*/
+	Execute_heap(C_heap_k2, 500, k2);
+
+	/*Execute with C input, n=500 k=100*/
+	Execute_heap(C_heap_k3, 500, k3);
+
+	/*Execute with D input, n=1000 k=8*/
+	Execute_heap(D_heap_k1, 1000, k1);
+
+	/*Execute with D input, n=1000 k=50*/
+	Execute_heap(D_heap_k2, 1000, k2);
+
+	/*Execute with D input, n=1000 k=100*/
+	Execute_heap(D_heap_k3, 1000, k3);
+
+	delete[] A_heap_k1;
+	delete[] A_heap_k2;
+	delete[] A_heap_k3;
+	delete[] B_heap_k1;
+	delete[] B_heap_k2;
+	delete[] B_heap_k3;
+	delete[] C_heap_k1;
+	delete[] C_heap_k2;
+	delete[] C_heap_k3;
+	delete[] D_heap_k1;
+	delete[] D_heap_k2;
+	delete[] D_heap_k3;
+	delete[] A_rand_quick_k1;
+	delete[] B_rand_quick_k1;
+	delete[] C_rand_quick_k1;
+	delete[] D_rand_quick_k1;
+	delete[] A_rand_quick_k2;
+	delete[] B_rand_quick_k2;
+	delete[] C_rand_quick_k2;
+	delete[] D_rand_quick_k2;
+	delete[] A_rand_quick_k3;
+	delete[] B_rand_quick_k3;
+	delete[] C_rand_quick_k3;
+	delete[] D_rand_quick_k3;
+
 	return 0;
 }
 

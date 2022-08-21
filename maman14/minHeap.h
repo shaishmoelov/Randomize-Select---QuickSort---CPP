@@ -9,6 +9,7 @@ class minHeap{
 
 public:
 
+	/*Constructor*/
 	minHeap(T* arr, int n) {
 		this->arr = arr;
 		this->arrSize = n;
@@ -16,13 +17,15 @@ public:
 		this->heapSize = n;
 	}
 	
-
+	/*Implemented like we learned in book*/
 	void buildMinHeap() {
 		for (int i = arrSize / 2 ; i >= 0; i--) {
 			minHeapify(i);
 		}
 	}
 
+
+	/*Implemented like we learned in book*/
 	void minHeapify(int i) {
 		int l = getLeft(i);
 		int r = getRight(i);
@@ -65,13 +68,15 @@ public:
 	int getRight(int i) {
 		return (i << 1) + 2;
 	}
-
+	/*print the heap in the order of the tree indexes*/
 	void printHeap() {
 		for (int i = 0; i < heapSize; i++) {
 			printf("%d ", arr[i]);
 		}
 	}
 
+
+	/*Implemented like we learned in book*/
 	int heapExtractMin() {
 		if (heapSize < 1) {
 			std::cout << "heap underflow" << std::endl;
@@ -83,6 +88,8 @@ public:
 		return min;
 	}
 
+
+	/*Print the number of compares we done untill now with the heap struction*/
 	void printCmpSize() {
 		std::cout << "The number of compares in the past algorithem between array elemnts was: " <<
 			cmpCount << std::endl;

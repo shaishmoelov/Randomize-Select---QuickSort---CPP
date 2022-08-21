@@ -1,6 +1,8 @@
 #include<iostream>
 
 
+
+
 /**
  * @brief - Swap between two elements by indexes
  * @tparam T - Parameter for generic functions
@@ -15,14 +17,7 @@ void swapT(T* arr, int idx1, int idx2) {
 	arr[idx2] = tmp;
 }
 
-/**
- * @brief 
- * @tparam T 
- * @param arr 
- * @param p 
- * @param r 
- * @return 
-*/
+/*Implemented like we learned in book*/
 template<class T>
 int partition(T* arr, int p, int r,int *cmp) {
 	T x = arr[r];
@@ -39,14 +34,7 @@ int partition(T* arr, int p, int r,int *cmp) {
 }
 
 
-/**
- * @brief 
- * @tparam T 
- * @param arr 
- * @param p 
- * @param r 
- * @return 
-*/
+/*Implemented like we learned in book*/
 template<class  T>
 int randomizePartition(T* arr, int p, int r,int *cmp) {
 	int i = (rand() % r) + 1;
@@ -55,36 +43,22 @@ int randomizePartition(T* arr, int p, int r,int *cmp) {
 }
 
 
-/**
- * @brief 
- * @tparam T 
- * @param arr 
- * @param p 
- * @param r 
-*/
+/*Implemented like we learned in book*/
 template<class T>
 void quickSort(T* arr, int p, int r,int *cmp) {
 	if (p < r) {
-		int q = randomizePartition(arr, p, r,cmp);
+		int q = partition(arr, p, r,cmp);
 		quickSort(arr, p, q - 1,cmp);
 		quickSort(arr, q + 1, r,cmp);
 	}
 }
 
 
-/**
- * @brief 
- * @tparam T 
- * @param arr 
- * @param p 
- * @param r 
- * @param i 
- * @return 
-*/
+/*Implemented like we learned in book*/
 template<class T>
 T randomizeSelect(T* arr, int p, int r, int i,int *cmp) {
 	if (p == r) return arr[p];
-	int q = randomizePartition(arr, p, r,cmp);
+	int q = partition(arr, p, r,cmp);
 	int k = q - p + 1;
 	if (i == k) {
 		return arr[q];
